@@ -1,0 +1,9 @@
+<p>shop works!</p>
+
+<ul class="listOfProducts" *ngFor="let product of products">
+  <li>{{product.id}}</li>
+  <li>{{product.name}}</li>
+  <li>{{product.price}}</li>
+</ul>
+
+<button (click)='btnClick()' >Ir a carrito</button>
