@@ -1,9 +1,23 @@
 <p>shop works!</p>
 
-<ul class="listOfProducts" *ngFor="let product of products">
-  <li>{{product.id}}</li>
-  <li>{{product.name}}</li>
-  <li>{{product.price}}</li>
-</ul>
+<section *ngFor="let product of products">
+  <ul class="listOfProducts">
+    <li>{{ product.id }}</li>
+    <li>{{ product.name }}</li>
+    <li>{{ product.price }} £</li>
+    <button (click)="addNew(product)">+</button>
+    <button>-</button>
+  </ul>
+</section>
 
-<button (click)='btnClick()' >Ir a carrito</button>
+<div *ngIf="cart">
+  <h2>Cart:</h2>
+  <ul *ngFor="let p of cart">
+    <li>{{p.name}}
+    {{p.price}} £
+    {{p.name}}</li>
+    <li> TOTAL --> {{p.price*p.quantity | number : '1.2-2'}} £</li>
+  </ul>
+</div>
+
+<button (click)="btnClick()">Ir a carrito</button>
