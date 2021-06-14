@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../interface/products';
 import { PRODUCTS } from '../data/mock-products';
-import { CartProduct } from '../interface/CartProduct';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ProductCar } from '../interface/CartProduct';
+import { CartService } from '../service/cart.service';
 
 @Component({
   selector: 'app-shop',
@@ -12,38 +12,35 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class ShopComponent implements OnInit {
   products = PRODUCTS;
-  product: Product[] = [];
-  cart: CartProduct[] = [];
+  cart: ProductCar[] = [];
+  totalProducts: number = 0;
+  total: number = 0;
 
-  constructor(private route: Router) {}
+  constructor(private route: Router, private cartService: CartService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cart = this.cartService.cart;
+    this.getTotal();
+  }
 
   btnClick() {
     this.route.navigateByUrl('/basket');
   }
 
   addNew(product: Product) {
-    //si el producto no esta selecionado, lo añadimos y si esta selecionado hacemos sumatorio (se suma +1 quantity)
-    let productCart = this.cart.find(
-      (elementCart) => elementCart.id === product.id
+    this.cartService.addNew(product);
+    this.cart = this.cartService.cart;
+    console.log(this.cart);
+  }
+
+  deleteNew(product: Product): void {
+    this.cartService.deleteNew(product);
+  }
+
+  getTotal() {
+    this.cartService.total$.subscribe((newTotal) => (this.total = newTotal));
+    this.cartService.carritoLength$.subscribe(
+      (carrLength) => (this.totalProducts = carrLength)
     );
-    if (productCart === undefined) {
-      // this.cart.push(product);
-      // } else {
-      //   productCart.quantity === 1;
-      let CartProductToAdd = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity:1,
-        discount:0,
-        totalPriceWithDiscount:0,
-      };
-      this.cart.push(CartProductToAdd)
-    }else{
-      productCart.quantity +=1
-    }
-    console.log(product);
   }
 }

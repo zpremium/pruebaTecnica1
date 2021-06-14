@@ -4,20 +4,43 @@
   <ul class="listOfProducts">
     <li>{{ product.id }}</li>
     <li>{{ product.name }}</li>
-    <li>{{ product.price }} £</li>
+    <li>£ {{ product.price }}</li>
     <button (click)="addNew(product)">+</button>
-    <button>-</button>
+    <button (click)="deleteNew(product)">-</button>
   </ul>
 </section>
 
+<div>
+  <h2>DISCOUNT:</h2>
+  <ul>
+    <li>Buy-one-get-one-free of Green tea. (2*1)</li>
+    <li>
+      Strawberries, if you buy 3 or more strawberries, the price should drop to
+      £4.50
+    </li>
+    <li>
+      Coffee. If you buy 3 or more coffees, the price of all coffees should drop
+      to two thirds.
+    </li>
+  </ul>
+</div>
+
 <div *ngIf="cart">
   <h2>Cart:</h2>
-  <ul *ngFor="let p of cart">
-    <li>{{p.name}}
-    {{p.price}} £
-    {{p.name}}</li>
-    <li> TOTAL --> {{p.price*p.quantity | number : '1.2-2'}} £</li>
-  </ul>
+  <div *ngFor="let product of cart">
+    <h4>{{ product.name }}</h4>
+    <ul>
+      <li>Unit Price: £ {{ product.price }}</li>
+      <li *ngIf="product.finalPrice">Price WITH discount: {{ product.finalPrice | number:'1.2-2' }}</li>
+      <li>Quantity: {{ product.quantity }} unit(s)</li>
+    </ul>
+  </div>
+</div>
+
+<div >
+  <div >
+    <p>Total of ur shop => £ {{ total }}</p>
+  </div>
 </div>
 
 <button (click)="btnClick()">Ir a carrito</button>

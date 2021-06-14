@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShopComponent } from './shop/shop.component';
 import { BasketComponent } from './basket/basket.component';
+import { CartService } from './service/cart.service';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,7 @@ import { BasketComponent } from './basket/basket.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

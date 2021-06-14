@@ -1,8 +1,10 @@
-export interface CartProduct {
-  id:string;
-  name:string;
-  price:number;
-  quantity:number;
-  discount:number;
-  totalPriceWithDiscount:number;
+export interface ProductCar {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  finalPrice?: number;
+  finalPriceWithoutDiscount?:number;
+  quantityFree?:number;
+  // quantityFree/2
 }
