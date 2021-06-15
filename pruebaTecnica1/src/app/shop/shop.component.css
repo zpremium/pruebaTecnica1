@@ -1,0 +1,49 @@
+*{
+  box-sizing: border-box;
+  
+}
+
+img{
+  height: 400px;
+  object-fit:cover;
+}
+
+nav{
+  margin-bottom: 20px;
+}
+.pagar{
+  width: 100px;
+}
+
+.center{
+  position: relative;
+  text-align: center;
+}
+
+
+.dinero{
+    background: black;
+    color: white;
+    border-radius: 10%;
+    position: absolute;
+    width: 120px;
+    top: 50%;
+    left: -75px;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.btn{
+  width: 50%;
+}
+
+.card-footer{
+  height: 175px;
+}
+
+.alert{
+  top: 10px;
+}
+
+
+

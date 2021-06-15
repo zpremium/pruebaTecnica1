@@ -11,7 +11,6 @@ export class CartService {
   products = PRODUCTS;
   cart: ProductCar[] = [];
 
-  carrito: ProductCar[] = [];
   cartProducts: ProductCar[] = [];
   precioTotal = new BehaviorSubject<number>(0);
   totalProducts = new BehaviorSubject<number>(0);
@@ -60,8 +59,9 @@ export class CartService {
       this.cart.splice(index, 1);
     }
     console.log(product);
-    this.checkDiscount(this.cart);
+    this.checkDiscount(this.cart); this.getTotal()
     return this.cart;
+
   }
 
   checkDiscount(list: ProductCar[]) {
@@ -88,7 +88,7 @@ export class CartService {
 
         case 'CF1':
           if (list[i].quantity >= 3) {
-            list[i].finalPrice = list[i].price * 0.6 * list[i].quantity;
+            list[i].finalPrice = list[i].price * 0.67 * list[i].quantity;
           } else if (list[i].quantity === 1) {
             list[i].finalPrice = list[i].price;
           } else if (list[i].quantity === 2) {
@@ -99,14 +99,18 @@ export class CartService {
     }
   }
 
+  getCart(){
+    return this.cart
+  }
+
   getTotal() {
-    let newTotal = this.carrito.reduce((acc, obj) => {
-      return acc + obj.finalPrice!;
+    let newTotal = this.cart.reduce((acumulado, siguiente) => {
+      return acumulado + siguiente.finalPrice!;
     }, 0);
 
-    let carrLenght = this.carrito.reduce((acc, obj) => acc + obj.quantity!, 0);
-    console.log('total', carrLenght);
+    let cartNumberOfProducts = this.cart.reduce((acumulado, siguiente) => acumulado + siguiente.quantity, 0);
+    console.log('total', cartNumberOfProducts);
     this.precioTotal.next(newTotal);
-    this.totalProducts.next(carrLenght);
+    this.totalProducts.next(cartNumberOfProducts);
   }
 }
