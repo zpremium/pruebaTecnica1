@@ -35,3 +35,6 @@ Some navigation between the routes.
 A service calculating and persisting total amount.
 
 Demoable without an actual backend (use some approriate client-side API server for demoing)
+
+![prueba1](https://user-images.githubusercontent.com/76445704/123518000-4d9c4680-d6a4-11eb-99bf-066db5caf0ba.jpg)
+![purschase jgp](https://user-images.githubusercontent.com/76445704/123518002-512fcd80-d6a4-11eb-80fe-94ebd8c78022.JPG)
