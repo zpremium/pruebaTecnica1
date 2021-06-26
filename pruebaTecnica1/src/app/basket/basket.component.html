@@ -1,0 +1,51 @@
+<div class="container" *ngIf="cart">
+  <h2 class="purchaseTitle">Your purchase: </h2>
+  <div class="row">
+    <ul
+      class="list-group list-group-flush col lista"
+      *ngFor="let product of cart"
+    >
+      <li class="list-group-item">
+        <h3>{{ product.name }}</h3>
+      </li>
+      <li class="list-group-item"><strong>Unit Price:</strong>  £ {{ product.price }}</li>
+      <li class="list-group-item" *ngIf="product.id === 'GR1'">
+        <strong>Quantity Free:</strong>  {{ product.quantity / 2 }}
+      </li>
+      <li
+        class="list-group-item"
+        *ngIf="
+          product.id === 'SR1' && product.quantity >= 3 && product.finalPrice
+        "
+      > <strong>Price Dropped:</strong>
+         £
+        {{
+          product.price * product.quantity - product.finalPrice
+            | number: "1.2-2"
+        }}
+      </li>
+      <li
+        class="list-group-item"
+        *ngIf="
+          product.id === 'CF1' && product.quantity >= 3 && product.finalPrice
+        "
+      > <strong>Price Dropped:</strong>
+         £
+        {{
+          product.price * product.quantity - product.finalPrice
+            | number: "1.2-2"
+        }}
+      </li>
+
+      <li class="list-group-item" *ngIf="product.finalPrice">
+       <strong>Price WITH discount:</strong>  £ {{ product.finalPrice | number: "1.2-2" }}
+      </li>
+      <li class="list-group-item"><strong>Quantity:</strong>  {{ product.quantity }} unit(s)</li>
+    </ul>
+  </div>
+</div>
+<h2 >TOTAL OF YOUR PURCHASE → <span class="totalPrice">£ {{ total | number: "1.2-2"}}</span></h2>
+<div class="alert alert-primary" role="alert">
+  Press on the price to continue with your purchase
+</div>
+<button class="btn btn-dark" (click)="btnClickBack()">Go back</button>
